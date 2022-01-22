@@ -71,15 +71,26 @@ Official release note please check ReleaseNotes.pdf
   
 * ZYXEL NWD6602
 </details>
+
+[Deepow Wifi 802.11n/g/b/a/AC (2.4G/300Mbps+5G/867Mbps)](https://www.amazon.fr/Dongle-Wifi-Adaptateur-Wireless-600Mbps/dp/B07NVJLPDD/ref=sr_1_5?keywords=Moglor&qid=1556401118&s=gateway&sr=8-5&th=1)
   
 
 And more.
 
-# How to use this kernel module
+## How to use this kernel module
 * Ensure you have C compiler & toolchains, e.g. `build-essential` for Debian/Ubuntu, `base-devel` for Arch, etc.
 * Make sure you have installed the corresponding kernel headers
 * All commands need to be run in the driver directory
 * You need rebuild the kernel module everytime you update/change the kernel if you are not using DKMS
+
+## Platform tested
+
+Linux Mint Tricia 20.3
+Currently tested on X86_64 and ARM platform(s) **only**, cross compile possible.
+
+_Update 22/01/2022_ : Test on last LTS Kernel **5.13.0-27-generic**
+
+Card name (lsusb) : **ID 0bda:0129 / Realtek Semiconductor Corp. RTS5129 Card Reader Controller**
 
 
 ## Manual installation
@@ -111,9 +122,10 @@ sudo make uninstall
 
 ## Manual DKMS installation
 ```
-git clone "https://github.com/RinCat/RTL88x2BU-Linux-Driver.git" /usr/src/rtl88x2bu-git
+git clone "https://github.com/akred/RTL88x2BU-Linux-Driver.git" /usr/src/rtl88x2bu-git
 sed -i 's/PACKAGE_VERSION="@PKGVER@"/PACKAGE_VERSION="git"/g' /usr/src/rtl88x2bu-git/dkms.conf
 dkms add -m rtl88x2bu -v git
+sudo dkms install rtl88x2bu/git
 dkms autoinstall
 ```
 
