@@ -132,10 +132,18 @@ dkms autoinstall
 # USB 3.0 Support
 You can try use `modprobe 88x2bu rtw_switch_usb_mode=1` to force the adapter run under USB 3.0. But if your adapter/port/motherboard not support it, the driver will be in restart loop. Remove the parameter and reload the driver to restore. Alternatively, `modprobe 88x2bu rtw_switch_usb_mode=2` let\'s it run as USB 2 device.
 
-Notice: If you had already loaded the moduel, use `modprobe -r 88x2bu` to unload it first.
+Notice: If you had already loaded the module, use `modprobe -r 88x2bu` to unload it first.
 
 If you want to force a given mode permanently (even when switching the adapter across devices), create the file `/etc/modprobe.d/99-RTL88x2BU.conf` with the following content:
 `options 88x2bu rtw_switch_usb_mode=1`
+
+# Unload internal wifi card
+Some computer might boot with their internal driver wifi card. If you want to use by default the external USB wifi, you need to first unload the internal driver.
+To do so, you have to created a configuration file in :
+`/etc/modprobe.d/ath9k.conf`
+
+This file should contains you driver name to blacklist :
+`blacklist ath9k`
 
 
 # Debug
